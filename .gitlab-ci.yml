@@ -1,0 +1,9 @@
+stages:
+  - build
+
+image: python:3.8-slim-buster
+
+build:
+  stage: build
+  script:
+    - echo "A job called build inside the build stage"

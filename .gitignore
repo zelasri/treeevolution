@@ -1,0 +1,26 @@
+# IDE and setup
+.vscode
+.python-version
+__pycache__
+
+# package build
+dist
+src/treevolution.egg-info
+
+# pytest
+.coverage
+coverage.xml
+nosetests.xml
+.pytest_cache
+*,cover
+
+# pylint
+report.xml
+
+# documentation
+docs/build
+docs/source/_autosummary
+public
+
+# web application
+web/static/tmp
