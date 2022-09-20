@@ -4,7 +4,7 @@
 
 Python package for forest evolution.
 
-**Author:** Prénom Nom
+**Author:** zakaria EL asri
 
 ## Resources
 
