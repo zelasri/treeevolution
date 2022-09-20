@@ -9,3 +9,7 @@ build:
     - pip install --upgrade pip
     - pip install -r requirements.txt
     - python -m build
+test:
+  stage: test
+    - pytest --cov=src/treevolution 
+
