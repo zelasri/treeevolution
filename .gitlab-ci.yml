@@ -4,6 +4,7 @@ stages:
 
 image: python:3.8-slim-buster
 before_script:
+    - pip install --upgrade pip
     - pip install -r requirements.txt
     - pip install dist/treevolution-0.0.1-py3-none-any.whl
 build:
