@@ -10,8 +10,8 @@ sys.path.insert(0, os.path.abspath('../../src'))  # Source code dir relative to 
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'treevolution'
-copyright = '2022, Prénom Nom'
-author = 'Prénom Nom'
+copyright = '2022, Zakaria  El asri'
+author = 'Zakaria El asri'
 release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
