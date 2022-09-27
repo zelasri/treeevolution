@@ -12,6 +12,7 @@ build:
     - python -m build
     
 test:
+  stage: test
   script:
     - pytest --cov=src/treevolution 
 
