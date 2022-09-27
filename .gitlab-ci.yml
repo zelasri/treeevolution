@@ -22,7 +22,7 @@ test:
 pages:
   stage: deploy
   script:
-   - sphinx-build -b html docs/source/ docs/build public
+   - sphinx-build -b html docs/source/  public
   artifacts:
     paths:
     - public
