@@ -9,18 +9,16 @@ class TestWorld:
     """Test class in order to test Season behavior
     """
     def test_World(self):
-
-        
-        world = World(80, 70,"2022-08-22")
-        assert world.height == 80
-        assert world.width == 70
-        assert str(world.start_date) == "2022-08-22 00:00:00"
+        world = World(90, 71, "2022-10-10 00:00:00")
+        assert world._height == 90
+        assert world._width == 71
+        assert str(world._start_date) == "2022-10-10 00:00:00"
 
     def test_step(self):
-        w1 = World(80, 70,"2022-08-10")
-        assert str(w1.step("2022-08-09")) == "2022-08-10 00:00:00"
+        world1 = World(90, 70, "2022-08-10 00:00:00")
+        assert str(world1.step("2022-10-15 00:00:00")) == "2022-10-16 00:00:00"
 
     def date_test(self):
-         w1 = World(80, 70,"2022-08-10")
+         w1 = World(80, 70,"2022-08-10 00:00:00")
          assert w1.date() == date.today()
 
