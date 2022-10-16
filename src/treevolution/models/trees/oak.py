@@ -27,4 +27,3 @@ class Oak(Tree):
     def width(self):
         return self.height*0.08
     
-    
