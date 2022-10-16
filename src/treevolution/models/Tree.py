@@ -64,4 +64,5 @@ class Tree(ABC):
     def state(self):
         if self._age < self._max_age:
             return TreeState.TREE
-        
+        else:
+            return TreeState.HUMUS
