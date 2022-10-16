@@ -66,5 +66,14 @@ class Tree(ABC):
             return TreeState.TREE
         else:
             return TreeState.HUMUS
+    @property
+    def consumed(self):
+        if self.state() == TreeState.HUMUS:
+            hums = self.width*self._height**2
+            n = hums + self._max_age
+            if self._age < n:
+                return False
+            else:
+                return True 
 
 
