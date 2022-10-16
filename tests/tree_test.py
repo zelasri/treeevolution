@@ -1,5 +1,5 @@
 from treevolution.models.trees.oak import Oak
-#from treevolution.models.tree import Tree
+from treevolution.models.tree import Tree
 from treevolution.world import World
 from datetime import datetime
 from treevolution.context.weather import Weather
