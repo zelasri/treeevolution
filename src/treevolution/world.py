@@ -2,10 +2,6 @@
 Module which contains World class
 """
 from datetime import datetime, timedelta,date
-from treevolution.context import Weather
-from treevolution.context.context import Context
-
-
 
 class World():
     """
@@ -25,29 +21,7 @@ class World():
     def date(self):
         return date.today()
 
-   
-        
-    """
-        chaque jour un temps météo aléatoire est demandé basé sur la date du jour
-    
-        def step(self):
-        date = datetime.strptime(str(self._start_date), "%Y-%m-%d %H:%M:%S")
-        weather = Weather.random(date)
-       
-        Pour qu’un arbre soit simulé, on
-            considère un contexte sans filtre d’éclairage et une quantité de humus fixée à 0.
-        
-        c = Context( weather,0,0)
-        return date ,c.weather(),self._trees
-
-    def last_weather(self):
-            l = self.step()
-            _ ,weather,_ = l[-1]
-            return weather
-    
-    def consumed(self):
-        pass
-        """
-
-
+    def add_tree(self,tree):
+        self._trees.append(tree)
+         
     
