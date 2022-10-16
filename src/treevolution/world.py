@@ -24,9 +24,8 @@ class World():
 
     def add_tree(self,tree):
         self._trees.append(tree)
-    """""
+        
     def step(self):
         w = Weather.random(self._start_date)
         return self._start_date,w, self._trees
-    """
     
