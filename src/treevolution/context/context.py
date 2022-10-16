@@ -52,3 +52,4 @@ class Context():
             {int}: the `energy` Context property
         """
         return self._sun_intensity
+ #fix

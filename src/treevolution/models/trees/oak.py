@@ -18,7 +18,7 @@ class Oak(Tree):
             self.height+=0.005
         #return self.height
 
-
+#fix
 # la santé de l’arbre est définie par sa valeur nutritionnelle actuelle ;
     @property
     def health(self):
