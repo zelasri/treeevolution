@@ -1,0 +1,21 @@
+from treevolution.models.tree import Tree
+from treevolution.models.branch import Branch
+from treevolution.context.context import Context
+#sortie de dossier trees
+import random
+import math
+
+
+class OakBranch(Branch):
+    MIN_LENGTH, MAX_LENGTH = 1, 2.5
+    MIN_LEAVES_DENSITY, MAX_LEAVES_DENSITY = 0.05, 0.1
+    
+    def __init__(self):
+        super().__init__()
+
+    def evolve(self):
+        pass
+
+
+
+    
