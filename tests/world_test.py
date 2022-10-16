@@ -22,3 +22,4 @@ class TestWorld:
          w1 = World(80, 70,"2022-08-10 00:00:00")
          assert w1.date() == date.today()
 
+

@@ -66,3 +66,4 @@ class Tree(ABC):
             return TreeState.TREE
         else:
             return TreeState.HUMUS
+
