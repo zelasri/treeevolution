@@ -2,7 +2,7 @@
 Module which contains World class
 """
 from datetime import datetime, timedelta,date
-from treevolution.models.tree import Tree
+from treevolution.context import Weather
 
 class World():
     """
@@ -22,8 +22,15 @@ class World():
     def date(self):
         return date.today()
 
-    def append(self,tree:Tree):
+    def add_tree(self,tree):
         self._trees.append(tree)
-        return self._trees
-    def step 
+
+    def step(self):
+        w = Weather.random(self._start_date)
+        return self._start_date,w, self._trees
+
+    
+
+        
+    
     

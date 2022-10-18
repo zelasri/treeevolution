@@ -1,19 +1,20 @@
 from abc import ABC, abstractmethod
 from treevolution.context.context import Context
+from treevolution.models.tree import Tree
 from dateutil.relativedelta import relativedelta, MO
 from treevolution.context.weather import Weather
 from treevolution.models.state import TreeState
-from treevolution.models.tree import Tree
+from treevolution.models.branch import Branch
 from treevolution.models.state import BranchState
 
 
 class Branch(ABC):
-    def __init__(self,birth,tree:Tree):
+    def __init__(self,_height,birth,tree:Tree):
         self._tree = tree
         self._birth = birth
         self._state = BranchState.EVOLVE
         self._lenght = 0
-        self._height = 0
+        self._height = _height
         self._max_length =  None
         self._density = 0
         

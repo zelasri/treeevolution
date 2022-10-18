@@ -9,7 +9,7 @@ image: python:3.8-slim-buster
 before_script:
     - pip install --upgrade pip
     - pip install -r requirements.txt
-    - pip install -e .
+    - pip install treevolution-0.0.5-py3-none-any.whl
 
 build:
   stage: build
@@ -58,7 +58,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script: 
-    - pip install -e .
+    - pip install treevolution-0.0.5-py3-none-any.whl
     - pytest -v -o junit_family=xunit1 --cov=src
       --cov-report xml:tests/coverage.xml
       --junitxml=tests/nosetests.xml
