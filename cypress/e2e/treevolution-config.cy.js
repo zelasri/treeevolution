@@ -15,3 +15,33 @@ describe('Story 1', () => {
     cy.get('h2').contains('Welcome to the Treevolution simulator') // first test
     })
     })
+describe('Story 2', () => {
+    it('Check the value day in config page', () => {
+    cy.visit('http://0.0.0.0:5000/config')
+    cy.wait(500) // add some delay
+    cy.get('input[type=range]').as('range').invoke('val',5)
+    cy.get('@range').should('have.value', 5)
+
+    })
+    })
+
+    describe('Story 4', () => {
+        it('Check the value day in config page', () => {
+        cy.visit('http://0.0.0.0:5000/config')
+        cy.wait(500) // add some delay
+        cy.get('select').eq(0).select('treevolution.models.trees.oak.Ash')
+        .should('have.value','Ash (treevolution.models.trees.oak.Ash)')
+
+      // confirm the selected value
+       
+    
+        })
+        })
+    describe('Story 5', () => {
+        it('Check the value day in config page', () => {
+        cy.visit('http://0.0.0.0:5000/config')
+        cy.wait(500) // add some delay
+        cy.get('#inputKindsTree').should('not.be.empty')
+
+            })
+            })
