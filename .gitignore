@@ -21,6 +21,11 @@ report.xml
 docs/build
 docs/source/_autosummary
 public
-
 # web application
 web/static/tmp
+# Dependency directories
+node_modules/
+# cypress directories
+cypress/downloads
+cypress/screenshots
+cypress/videos
