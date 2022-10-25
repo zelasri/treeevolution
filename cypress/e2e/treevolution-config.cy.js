@@ -24,7 +24,20 @@ describe('Story 2', () => {
 
     })
     })
+describe('Story 3', () => {
+    it('Check the value day in config page', () => {
+    cy.visit('http://0.0.0.0:5000/config')
+    cy.wait(500) // add some delay
+    cy.get('#inputStartDate').type('2022-10-04') //#inputEndDate
+    cy.get('#inputEndDate').type('2022-10-03')
+    cy.get('#inputKindsTree').select(0)
+    cy.get('button[type="submit"]').click() // apres click cy.wait
+    cy.wait(500)
+    cy.get('div[role="alert"] > div').contains('Invalid start date and end date.')       
+    })
+    })
 
+    
 describe('Story 4', () => {
     it('Check the value day in config page', () => {
     cy.visit('http://0.0.0.0:5000/config')
