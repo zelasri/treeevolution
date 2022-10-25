@@ -25,23 +25,45 @@ describe('Story 2', () => {
     })
     })
 
-    describe('Story 4', () => {
-        it('Check the value day in config page', () => {
-        cy.visit('http://0.0.0.0:5000/config')
-        cy.wait(500) // add some delay
-        cy.get('select').eq(0).select('treevolution.models.trees.oak.Ash')
-        .should('have.value','Ash (treevolution.models.trees.oak.Ash)')
+describe('Story 4', () => {
+    it('Check the value day in config page', () => {
+    cy.visit('http://0.0.0.0:5000/config')
+    cy.wait(500) // add some delay
+    cy.get('select').eq(0).select('treevolution.models.trees.oak.Ash')
+    .should('have.value','Ash (treevolution.models.trees.oak.Ash)')       
+    })
+    })
 
-      // confirm the selected value
-       
+describe('Story 5', () => {
+    it('Check the value day in config page', () => {
+    cy.visit('http://0.0.0.0:5000/config')
+    cy.wait(500) // add some delay
+    cy.get('#inputKindsTree').should('not.be.empty')
+    })
+    })
+
+describe('Story 5', () => {
+    beforeEach(() => {
+        cy.visit("http://0.0.0.0:5000/config");
+        cy.get('input[name="seed"]').as("seed");
+        cy.get('input[name="treeNumber"]').as("treeN");
+        cy.get('input[type=range]').as("range");
+        cy.get('select[name="classes"]').as("class");
+      });
     
-        })
-        })
-    describe('Story 5', () => {
-        it('Check the value day in config page', () => {
-        cy.visit('http://0.0.0.0:5000/config')
-        cy.wait(500) // add some delay
-        cy.get('#inputKindsTree').should('not.be.empty')
+      it("submits user input", () => {
+        cy.get("@seed")
+          .invoke("val",42)
+          .get("@treeN")
+          .invoke("val",13)
+          .get("@class")
+          .should('not.be.empty')
+          .get('[class="row"] [type="submit"]')
+          .click()
+        cy.wait(500)
+        
+    
+      })
+    })
 
-            })
-            })
+    
