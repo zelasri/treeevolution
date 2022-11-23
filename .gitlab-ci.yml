@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - deploy
+  - deploy_heroku
 
 image: python:3.8-slim-buster
 before_script:
@@ -29,4 +30,15 @@ pages:
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
 
-
+heroku_deploy_dev:
+  stage: deploy_heroku
+  image: ruby:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  when: never
+    - when: always
+  before_script:
+    - echo "Prepare to deploy on Heroku on dev server"
+  script:
+    - gem install dpl dpl-heroku
+    - dpl --provider=heroku --app=treevolution-etudiant-zelasri --api-key=$HEROKU_KEY
