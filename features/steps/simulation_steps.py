@@ -119,6 +119,28 @@ def step_impl(context):
 
     #//*[@id="configurationPanel"]/table/tbody/tr[2]/td[2]
     
+@when('Story9')
+def step_impl(context):
+        context.browser.get("http://127.0.0.1:5000/")
+        context.browser.get("http://127.0.0.1:5000/simulation")
+
+        initSimulationBtn=context.browser.find_element(By.ID,"initSimulationBtn")
+        initSimulationBtn.click()
+        runSimulationBtn = context.browser.find_element(By.ID,"runSimulationBtn")
+        # lancer la simulation
+        runSimulationBtn.click()
+        time.sleep(10)
+        #arreter la simulation
+        runSimulationBtn.click()
+        # verfier que la simulation a progressé
+        progress = context.browser.find_element(By.ID,"simulationProgress").text
+        assert progress != '0%'
+        #réinitialiser la simulation
+        initSimulationBtn.click()
+        #verfier que la progression de la simulation reintialise a 0
+        progress = context.browser.find_element(By.ID,"simulationProgress").text
+        assert progress == '0%'
+
 
     
 
