@@ -9,8 +9,8 @@ afterEach(() => {
     })
 
 
-describe('Story 12', () => {
-        it('Lorsqu’une simulation est exécutée, puis mise en pause,il est possible de la réinitialiser.', () => {
+describe('Story 13', () => {
+        it('Check the value day in config page', () => {
         cy.visit('http://0.0.0.0:5000/config')
         cy.get('#inputStartDate').type('2022-12-13')
         cy.get('#inputEndDate').type('2023-12-20')
@@ -19,38 +19,37 @@ describe('Story 12', () => {
         cy.get('@range').should('have.value', 5)
         cy.get('button[type="submit"]').click()
         
+        
         cy.visit('http://0.0.0.0:5000/simulation')
                 cy.get('#initSimulationBtn').click()
                 cy.get('#runSimulationBtn').click()
-                cy.get('#runSimulationBtn').click()
-                cy.get('#initSimulationBtn').click()
-
-                cy.get('#simulationProgress').should('have.text', '0%')
-//  les informations de simulation réinitialisées  à la configuration courant,
-//idee c'est comparer info de la configuration et les info de la simulation
-                cy.get('#configurationPanel > table > tbody > tr:nth-child(2) > td:nth-child(2)')
+               
+                cy.get('#simulationProgress',{timeout: 20000}).should('contain', '100%')
+//verification que le nombre des arbres et le meme apres la pause               
+                cy.get('#legendPanel > table > tbody > tr:nth-child(2) > td:nth-child(2)')
                 .invoke('text')
                 .then((text1) => {
                 cy.get('#legendPanel > table > tbody > tr:nth-child(2) > td:nth-child(2)')
                 .invoke('text')
                 .should((text2) => {
-                    expect(text1).eq(text2)
-                })
-                })
-                
-                cy.get('#configurationPanel > table > tbody > tr:nth-child(3) > td:nth-child(2)')
-                .invoke('text')
-                .then((text1) => {
-                cy.get('#legendTitle > div > div.col-md-9')
-                .invoke('text')
-                .should((text2) => {
-                    var text2 = text2.split(" ");
-                    expect(text1).eq(text2[1])
-                })
-                })
-                cy.get("td").contains("Kinds").parent().siblings().first().should("contain","Ash")
-                })
-                    })
+                expect(text1).eq(text2)
+            })
+            })
+            cy.visit('http://0.0.0.0:5000/config')
+            cy.get('#inputEndDate')
+            .invoke('val')
+            .then((val1) => {
+            // do more work here
+            // click the button which changes the input's value
+            cy.visit('http://0.0.0.0:5000/simulation')
+            cy.get('#legendTitle > div > div.col-md-9')
+              .invoke('text')
+              .should((text2) => {
+                var text2 = text2.split(" ");
+                expect(val1).eq(text2[1])
+              })
+            })
 
 
-         
+                        })
+                        })
