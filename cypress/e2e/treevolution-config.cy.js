@@ -9,7 +9,7 @@ afterEach(() => {
     })
 
 
-describe('Story 9', () => {
+describe('Story 10', () => {
         it('Lorsqu’une simulation est créée depuis l’onglet /simulation à partir d’une configuration. Celle-ci peut-être supprimée si la configuration vient à changer.', () => {
         cy.visit('http://0.0.0.0:5000/config')
         cy.get('#inputStartDate').type('2022-12-13')
@@ -21,13 +21,18 @@ describe('Story 9', () => {
         
         cy.visit('http://0.0.0.0:5000/simulation')
         cy.get('#initSimulationBtn').click()
+        cy.get('#legendPanel > table > tbody > tr:nth-child(2) > td:nth-child(2)')
+        .invoke('text')
+        .then((text1) => {
         cy.get('#runSimulationBtn').click()
-        cy.visit('http://0.0.0.0:5000/config')
-        cy.get('#inputStartDate').type('2022-12-15')
-        cy.get('button[type="submit"]').click()
-        cy.wait(500)
-        cy.visit('http://0.0.0.0:5000/simulation')
-        cy.get('#legendPanel > div > p > i').contains('No current simulation available')
-        
+        cy.get('#simulationProgress',{timeout: 20000}).should('contain', '100%')
+        cy.get('#legendPanel > table > tbody > tr:nth-child(2) > td:nth-child(2)')
+        .invoke('text')
+        .should((text2) => {
+            expect(text1).not.eq(text2)
         })
-})
+        })
+        })
+        })
+
+
