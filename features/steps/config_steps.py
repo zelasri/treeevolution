@@ -15,4 +15,12 @@ def step(context):
     TreeNumber = context.browser.find_element(By.ID, "inputTreeNumber").get_attribute('value')
     New_TreeNumber = context.browser.execute_script("document.getElementById('inputTreeNumber').setAttribute('value', '25')")
     assert TreeNumber != New_TreeNumber
+#************* scenario 2 ******************************** #
+
+@when('i looking for value for range type and comparing it')
+def step(context):
+    TreeNumber = context.browser.find_element(By.ID, "inputTreeNumber").get_attribute('value')
+    New_TreeNumber = context.browser.execute_script("document.getElementById('inputTreeNumber').setAttribute('value', '25')")
+    assert TreeNumber != New_TreeNumber
+
     
