@@ -119,7 +119,7 @@ def step_impl(context):
 
     #//*[@id="configurationPanel"]/table/tbody/tr[2]/td[2]
     
-@when('Story9')
+@when('Lorsqu’une simulation est exécutée, il est possible de l’arrêter et de la réinitialiser')
 def step_impl(context):
         context.browser.get("http://127.0.0.1:5000/")
         context.browser.get("http://127.0.0.1:5000/simulation")
