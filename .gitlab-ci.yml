@@ -1,32 +1,83 @@
 stages:
   - build
-  - test
-  - deploy
+  - test 
+  - release
+  - sonarqube
+  - deploy 
+ #stages 
 
 image: python:3.8-slim-buster
-before_script:
-    - pip install --upgrade pip
-    - pip install -r requirements.txt
-    - pip install treevolution-0.0.5-py3-none-any.whl
 
+before_script:
+
+  - echo "Cette commande sera executée pour tous les jobs si souhaité"
+#job :
 build:
   stage: build
   script:
-    - python -m build    
-
-test:
-  stage: test
-  script:
-    - pytest --cov=src/treevolution
+    # - echo "A job called build inside the build stage"
+    - pip install -r requirements.txt
+    - python -m build
 
 pages:
   stage: deploy
   script:
-   - sphinx-build -b html docs/source/  public
+      - pip install -r requirements.txt
+      - sphinx-build -b html docs/source/ public
   artifacts:
     paths:
-    - public
+    - public 
   rules:
     - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+#creer un job relase job 
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG # Run this job when a tag is created
+  before_script:
+    - echo "Prepare new release"
+  script:
+    - echo "Running release_job"
+  release: # See https://docs.gitlab.com/ee/ci/yaml/#release
+    tag_name: '$CI_COMMIT_TAG'
+    description: '$CI_COMMIT_TAG'
 
+sonarqube-check:
+  stage: sonarqube
+  image: 
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+    GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script: 
+    - pip install -r requirements.txt
+    - pip install -e .
+    - pytest -v -o junit_family=xunit1 --cov=src
+      --cov-report xml:tests/coverage.xml
+      --junitxml=tests/nosetests.xml
+    - pylint --exit-zero --disable=C0303,R0902
+      --output pylint-report.txt src
+    - sonar-scanner
 
+  allow_failure: true
+  only:
+    - master # or the name of your main branch
+heroku_deploy_dev:
+  stage: deploy
+  image: ruby:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - when: always
+  before_script:
+    - echo "Prepare to deploy on Heroku on dev server"
+  script:
+    
+    - gem install dpl dpl-heroku
+    - dpl --provider=heroku --app=$HEROKU_DEV_APP_NAME --api-key=$HEROKU_KEY
