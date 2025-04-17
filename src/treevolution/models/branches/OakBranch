@@ -1,0 +1,30 @@
+from treevolution.models.branch import Branch
+from treevolution.context.context import Context
+#sortie de dossier trees
+import random
+import math
+
+
+class OakBranch(Branch):
+    MIN_LENGTH, MAX_LENGTH = 1, 2.5
+    MIN_LEAVES_DENSITY, MAX_LEAVES_DENSITY = 0.05, 0.1
+    
+    def __init__(self):
+        super().__init__()
+
+    def evolve(self):
+        super().evolve()
+        if self._lenght< OakBranch.max_length:
+            hr = 1-(self._height/self._tree._height)
+            self._height += 0.005 * hr
+        #return self.height
+
+
+# la santé de l’arbre est définie par sa valeur nutritionnelle actuelle ;
+    @property
+    def health(self):
+        return self.nutrient
+    @property
+    def width(self):
+        return self.height*0.08
+    

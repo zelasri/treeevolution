@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    <h2>Configuration panel</h2>
+    
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+
+        <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <span class="bi flex-shrink-0 me-2" width="24" height="24"><i class="bi bi-exclamation-triangle-fill"></i></span>
+            <div>
+                {%- for msg in errors %}
+                    {{ msg }}
+                {% endfor -%}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with success = get_flashed_messages(category_filter=["success"]) %}
+        {% if success %}
+        <div class="alert alert-success d-flex align-items-center" role="alert">
+            <span class="bi flex-shrink-0 me-2" width="24" height="24"><i class="bi bi-check2-all"></i></span>
+            <div>
+                {%- for msg in success %}
+                    {{ msg }}
+                {% endfor -%}
+            </div>
+        </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form method="POST" action="/update" class="row g-3">
+                
+                <div class="col-md-6 mb-3">
+                    <label for="inputSeed">
+                    <span>
+                        {% if config['seed'] %}
+                            <i class="bi bi-check-circle success-icon"></i>
+                        {% else %}
+                            <i class="bi bi-x-circle error-icon"></i>
+                        {% endif %}
+                    </span>
+                    Seed: 
+                    </label>
+                    <input type="number" name="seed" min="0" class="form-control" id="inputSeed" aria-describedby="seedHelp" placeholder="Enter seed number" value="{{config['seed']}}" required>
+                    <small id="seedHelp" class="form-text text-muted">a fixed seed allows you to always get the same result (although normally random)..</small>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="inputTreeNumber">
+                        <span>
+                            {% if config['ntrees'] %}
+                                <i class="bi bi-check-circle success-icon"></i>
+                            {% else %}
+                                <i class="bi bi-x-circle error-icon"></i>
+                            {% endif %}
+                        </span>
+                        Number of tree(s): <span id="treeNumber">{{config['ntrees']}}</span> 
+                    </label>
+                    <input type="range" name="treeNumber" class="form-range" 
+                        min="1" max="100" value="{{config['ntrees']}}" id="inputTreeNumber" onchange="changeNTrees(this.value)" placeholder="Enter expected tree number at beginning" value="{{config['ntrees']}}" required>            
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="inputStartDate">
+                            <span>
+                                {% if config['start'] %}
+                                    <i class="bi bi-check-circle success-icon"></i>
+                                {% else %}
+                                    <i class="bi bi-x-circle error-icon"></i>
+                                {% endif %}
+                            </span>
+                            Begin of simulation:
+                        </label>
+                        <input id="inputStartDate" name="startDate" class="form-control" value="{{config['start']}}" type="date" required/>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="inputEndDate">
+                        <span>
+                            {% if config['end'] %}
+                                <i class="bi bi-check-circle success-icon"></i>
+                            {% else %}
+                                <i class="bi bi-x-circle error-icon"></i>
+                            {% endif %}
+                        </span>
+                        End of simulation:
+                    </label>
+                    
+                    <input id="inputEndDate" name="endDate" class="form-control" value="{{config['end']}}" type="date" required/>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="inputDaysNumber">
+                        <span>
+                            {% if config['ndays'] %}
+                                <i class="bi bi-check-circle success-icon"></i>
+                            {% else %}
+                                <i class="bi bi-x-circle error-icon"></i>
+                            {% endif %}
+                        </span>
+                        Number of day(s) by step: <span id="daysNumber">{{config['ndays']}}</span> 
+                    </label>
+                    <input type="range" name="daysNumber" class="form-range" aria-describedby="nDaysHelp"
+                        min="1" max="10" value="{{config['ndays']}}" id="inputDaysNumber" onchange="changeNDays(this.value)" placeholder="Enter expected number of days to simulate at each step" value="{{config['ndays']}}" required>
+                    <small id="nDaysHelp" class="form-text text-muted">an important number of days by step can impact the simulation performance..</small>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="inputKindsTree">
+                        <span>
+                            {% if config['classes'] %}
+                                <i class="bi bi-check-circle success-icon"></i>
+                            {% else %}
+                                <i class="bi bi-x-circle error-icon"></i>
+                            {% endif %}
+                        </span>
+                        Available kind of trees inside simulation:
+                    </label>
+                    <select id="inputKindsTree" name="classes" class="form-select" multiple aria-label="multiple select" required>
+
+                        {% for module, tree, selected in trees %}
+                            <option value="{{module}}" {% if selected %}selected{% endif %}><strong>{{tree}}</strong> ({{module}})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>  
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/config.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+.tree-logo {
+    color: rgb(11, 103, 11); 
+    margin-right:10px;
+}
+
+select option:checked {
+    background: #0D6EFD -webkit-linear-gradient(bottom, #0D6EFD 0%, #66a3ff 100%);
+    color: white;
+}
+  
+.success-icon {
+    color: #009900;
+}
+
+.error-icon {
+    color: #cc3300;
+}
+
+tbody > tr:last-child > td {
+    border-bottom: 0;
+    padding-bottom: 0px;
+}
+
+.card-body {
+    padding: 0px 20px 0px 20px;
+}
+
+#simulationError {
+    padding-top: 1em;
+}
+
+#simulationCanvas {
+    background-color: #f2f2f2; 
+    width: 95%;
+    height: auto;
+    padding: 0;
+    margin: auto;
+    margin-top: 10px !important;
+    display: block;
+    border: #212529 solid 3px;
+}
+  
+.legend-tree {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    border-radius: 10px;
+    border: black solid 2px;
+}
+
+.legend-humus {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    border-radius: 10px;
+    border: black solid 5px;
+}
+
+.legend-seed {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    border: black solid 2px;
+}
+
+.legend-animal {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: middle;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 18px solid rgb(82, 58, 13);
+}
+
+.rotated {
+    transform: rotate(45deg); /* Equal to rotateZ(45deg) */
+    background-color: pink;
+}
+
+svg .rotate {
+    animation: rotate 5s linear infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
